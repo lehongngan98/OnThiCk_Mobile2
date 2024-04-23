@@ -8,133 +8,45 @@ import {
   Image,
   FlatList,
 } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import { AntDesign, FontAwesome5, FontAwesome } from "@expo/vector-icons";
 
 export default function Home() {
-  const listdatapopular = [
-    {
-      id: 1,
-      title: "PHP in One Click",
-      author: "Ramono Wultschnes",
-      image: require("../image/Image19.png"),
-      price: 59,
-      rating: 4.5,
-      ratingCount: 1233,
-      lessons: 18,
-    },
-    {
-      id: 2,
-      title: "Python Introduction",
-      author: "Ramono Wultschnes",
-      image: require("../image/Image20.png"),
-      price: 39,
-      rating: 4.5,
-      ratingCount: 1267,
-      lessons: 12,
-    },
-    {
-      id: 3,
-      title: "PHP in One Click",
-      author: "Ramono Wultschnes",
-      image: require("../image/Image19.png"),
-      price: 59,
-      rating: 4.5,
-      ratingCount: 1233,
-      lessons: 18,
-    },
-  ];
+  const [listdatapopular, setListdatapopular] = React.useState([]);
+  const [listdatarecomments, setListdatarecomments] = React.useState([]);
+  const [listdataTopTeacher,setListdataTopTeacher] = React.useState([]);
+  const [listdataCourseInspires, setListdataCourseInspires] = React.useState([]);
 
-  const listdatarecomments = [
-    {
-      id: 1,
-      title: "Website Design",
-      author: "Ramono Wultschnes",
-      image: require("../image/Image18.png"),
-      price: 59,
-      rating: 4.5,
-      ratingCount: 1233,
-      lessons: 9,
-    },
-    {
-      id: 2,
-      title: "UX Research For Beginners",
-      author: "Ramono Wultschnes",
-      image: require("../image/Image21.png"),
-      price: 29,
-      rating: 4.5,
-      ratingCount: 1782,
-      lessons: 12,
-    },
-    {
-      id: 3,
-      title: "Website Design",
-      author: "Ramono Wultschnes",
-      image: require("../image/Image18.png"),
-      price: 59,
-      rating: 4.5,
-      ratingCount: 1233,
-      lessons: 12,
-    },
-  ];
 
-  const listdataTopTeacher = [
-    {
-      id: 1,
-      teacher: "Christian Hayer",
-      school: "Stanford University",
-      image: require("../image/Image21.png"),
-      rating: 4.5,
-      ratingCount: 1233,
-    },
-    {
-      id: 2,
-      teacher: "Dennis Sweeney",
-      school: "University of California",
-      image: require("../image/Image25.png"),
-      rating: 4.5,
-      ratingCount: 1233,
-    },{
-      id: 3,
-      teacher: "Christian Hayer",
-      school: "Stanford University",
-      image: require("../image/Image26.png"),
-      rating: 4.5,
-      ratingCount: 1233,
-    },
-  ];
-  const listdataCourseInspires = [
-    {
-      id: 1,
-      title: "Digital Portrait",
-      author: "Ramono Wultschnes",
-      image: require("../image/Image15.png"),
-      price: 67,
-      rating: 4.5,
-      ratingCount: 657,
-      lessons: 12,
-    },
-    {
-      id: 2,
-      title: "Workspace Decor",
-      author: "Ruth Dominguez",
-      image: require("../image/Image23.png"),
-      price: 19,
-      rating: 4.5,
-      ratingCount: 33,
-      lessons: 17,
-    },
-    {
-      id: 3,
-      title: "Packageing Design",
-      author: "Hui. Anderson",
-      image: require("../image/Image24.png"),
-      price: 89,
-      rating: 4.5,
-      ratingCount: 1233,
-      lessons: 14,
-    },
-  ];
+  
+  useEffect(() => {
+    fetch("https://65636da6ee04015769a7312d.mockapi.io/popularCourse")
+      .then((response) => response.json())
+      .then((data) => {
+        setListdatapopular(data);
+      }); 
+
+      fetch("https://65636da6ee04015769a7312d.mockapi.io/recomment")
+      .then((response) => response.json())
+      .then((data) => {
+        setListdatarecomments(data);
+      });
+
+      fetch("https://6561fb1edcd355c083246fec.mockapi.io/courseInspires")
+      .then((response) => response.json())
+      .then((data) => {
+        setListdataCourseInspires(data);
+        console.log(data);
+      });
+
+      fetch("https://6561fb1edcd355c083246fec.mockapi.io/TopTeacher")
+      .then((response) => response.json())
+      .then((data) => {
+        setListdataTopTeacher(data);
+        console.log(data);
+      });
+     
+  }, []);
 
   return (
     <>
@@ -171,8 +83,9 @@ export default function Home() {
 
       <View style={{ alignItems: "center" }}>
         <ScrollView
-          style={{ width: "90%" }}
+          style={{ width: "90%", height: "78%" }}
           showsVerticalScrollIndicator={false}
+          removeClippedSubviews={true}
         >
           {/* image  */}
           <View style={{ marginBottom: 5 }}>
@@ -230,7 +143,7 @@ export default function Home() {
                     />
                     <Text
                       style={{
-                        fontSize:16,
+                        fontSize: 16,
                         fontWeight: 500,
                         marginLeft: 10,
                       }}
@@ -260,7 +173,7 @@ export default function Home() {
                     />
                     <Text
                       style={{
-                        fontSize:16,
+                        fontSize: 16,
                         fontWeight: 500,
                         marginLeft: 10,
                       }}
@@ -290,7 +203,7 @@ export default function Home() {
                     />
                     <Text
                       style={{
-                        fontSize:16,
+                        fontSize: 16,
                         fontWeight: 500,
                         marginLeft: 10,
                       }}
@@ -322,7 +235,7 @@ export default function Home() {
                     />
                     <Text
                       style={{
-                        fontSize:16,
+                        fontSize: 16,
                         fontWeight: 500,
                         marginLeft: 10,
                       }}
@@ -353,7 +266,7 @@ export default function Home() {
                     />
                     <Text
                       style={{
-                        fontSize:16,
+                        fontSize: 16,
                         fontWeight: 500,
                         marginLeft: 10,
                       }}
@@ -383,7 +296,7 @@ export default function Home() {
                     />
                     <Text
                       style={{
-                        fontSize:16,
+                        fontSize: 16,
                         fontWeight: 500,
                         marginLeft: 10,
                       }}
@@ -432,7 +345,7 @@ export default function Home() {
                       }}
                     >
                       <Image
-                        source={item.image}
+                        source={{ uri: item.image }}
                         style={{ width: 200, height: 150 }}
                       />
                       <View
@@ -517,7 +430,7 @@ export default function Home() {
                       }}
                     >
                       <Image
-                        source={item.image}
+                        source= {{ uri: item.image }}
                         style={{ width: 200, height: 150 }}
                       />
                       <View
@@ -605,7 +518,7 @@ export default function Home() {
                       }}
                     >
                       <Image
-                        source={item.image}
+                        source=   {{ uri: item.image }}
                         style={{ width: "40%", height: 100 }}
                       />
 
@@ -661,9 +574,8 @@ export default function Home() {
             </View>
           </View>
 
-
-           {/* View top teacher */}
-           <View style={{ marginTop: 30 }}>
+          {/* View top teacher */}
+          <View style={{ marginTop: 30 }}>
             {/* content top teacher */}
             <View
               style={{
@@ -673,7 +585,7 @@ export default function Home() {
               }}
             >
               <Text style={{ fontSize: 18, color: "black", fontWeight: 700 }}>
-              Top teacher
+                Top teacher
               </Text>
               <TouchableOpacity>
                 <Text style={{ fontSize: 18, color: "gray", fontWeight: 500 }}>
@@ -698,7 +610,7 @@ export default function Home() {
                       }}
                     >
                       <Image
-                        source={item.image}
+                        source={{uri: item.image}}
                         style={{ width: 200, height: 150 }}
                       />
                       <View
@@ -720,7 +632,7 @@ export default function Home() {
                       <Text style={{ fontWeight: 600, color: "gray" }}>
                         {item.school}
                       </Text>
-                      
+
                       <View
                         style={{ flexDirection: "row", alignItems: "center" }}
                       >
@@ -739,8 +651,7 @@ export default function Home() {
             </View>
           </View>
 
-
-          <View style={{ height: 150 }} />
+          {/* <View style={{ height: 150 }} /> */}
         </ScrollView>
       </View>
     </>
