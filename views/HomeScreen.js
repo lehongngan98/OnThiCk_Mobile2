@@ -43,7 +43,7 @@ export default function Home() {
       .then((response) => response.json())
       .then((data) => {
         setListdataTopTeacher(data);
-        console.log(data);
+        // console.log(data);
       });
      
   }, []);
